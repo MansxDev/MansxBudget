@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_home" />
+    <item
+        android:id="@+id/nav_transactions"
+        android:icon="@drawable/ic_list"
+        android:title="@string/nav_transactions" />
+    <item
+        android:id="@+id/nav_debts"
+        android:icon="@drawable/ic_debt"
+        android:title="@string/nav_debts" />
+    <item
+        android:id="@+id/nav_report"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/nav_report" />
+    <item
+        android:id="@+id/nav_budget"
+        android:icon="@drawable/ic_bank"
+        android:title="@string/nav_budget" />
+</menu>

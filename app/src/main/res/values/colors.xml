@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand palette (Coolors) -->
+    <color name="pal_ice">#D4DCFF</color>
+    <color name="pal_lavender">#7D83FF</color>
+    <color name="pal_azure">#007FFF</color>
+    <color name="pal_mint">#1AFFD5</color>
+    <color name="pal_wine">#590925</color>
+    <color name="pal_azure_dark">#0055CC</color>
+    <color name="pal_azure_soft">#66B2FF</color>
+    <color name="pal_mint_dark">#0FBFA0</color>
+    <color name="pal_wine_soft">#8B1F45</color>
+
+    <!-- Brand legacy aliases -->
+    <color name="brand_green">#0FBFA0</color>
+    <color name="brand_green_dark">#0D8A72</color>
+    <color name="brand_teal">#66B2FF</color>
+    <color name="brand_green_neon">#1AFFD5</color>
+    <color name="brand_cyan_neon">#1AFFD5</color>
+
+    <!-- Semantic light -->
+    <color name="income_green">#0FBFA0</color>
+    <color name="income_green_bg">#E0FAF3</color>
+    <color name="expense_red">#E02424</color>
+    <color name="expense_red_bg">#FCE8E8</color>
+    <color name="warning_amber">#B45309</color>
+    <color name="warning_bg">#FEF3C7</color>
+
+    <!-- Semantic fixed (used by ThemeHelper on both themes) -->
+    <color name="success">#0FBFA0</color>
+    <color name="success_neon">#1AFFD5</color>
+    <color name="danger">#F87171</color>
+
+    <!-- Legacy names kept for old drawables/dialogs -->
+    <color name="primary">#007FFF</color>
+    <color name="primary_dark">#0055CC</color>
+    <color name="primary_light">#E6F0FF</color>
+    <color name="accent">#0FBFA0</color>
+    <color name="bg_main">#F5F7FF</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="border_color">#E3E8FF</color>
+    <color name="input_bg">#EEF2FF</color>
+    <color name="text_primary">#590925</color>
+    <color name="text_secondary">#8B1F45</color>
+    <color name="text_hint">#9AA3B8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="btn_danger">#E02424</color>
+    <color name="btn_secondary">#8B1F45</color>
+
+    <!-- Dark theme surfaces (as refs: literals break Material tint resolution) -->
+    <color name="dark_on_primary">#06231B</color>
+    <color name="dark_on_secondary">#10121F</color>
+    <color name="dark_surface">#590925</color>
+    <color name="dark_on_surface">#D4DCFF</color>
+    <color name="dark_error">#F87171</color>
+    <color name="dark_status">#3A0718</color>
+    <color name="dark_bg">#1A0210</color>
+    <color name="dark_text_primary">#D4DCFF</color>
+    <color name="dark_text_secondary">#C9B4C4</color>
+
+    <!-- AMOLED theme surfaces -->
+    <color name="amoled_on_primary">#000000</color>
+    <color name="amoled_on_secondary">#FFFFFF</color>
+    <color name="amoled_surface">#0A0A0A</color>
+    <color name="amoled_on_surface">#D4DCFF</color>
+    <color name="amoled_error">#F87171</color>
+    <color name="amoled_status">#000000</color>
+    <color name="amoled_bg">#000000</color>
+    <color name="amoled_text_primary">#D4DCFF</color>
+    <color name="amoled_text_secondary">#AAAFC7</color>
+    <!-- Chart palette (works on light & dark) -->
+    <color name="chart_1">#007FFF</color>
+    <color name="chart_2">#1AFFD5</color>
+    <color name="chart_3">#7D83FF</color>
+    <color name="chart_4">#590925</color>
+    <color name="chart_5">#0FBFA0</color>
+    <color name="chart_6">#66B2FF</color>
+    <color name="chart_7">#8B1F45</color>
+    <color name="chart_8">#3A0718</color>
+</resources>

@@ -1,0 +1,17 @@
+# Gradle / build
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+.DS_Store
+
+# Release artifacts (terlalu besar untuk repo; histori ada di TIMELINE.md)
+*.apk
+*.aab
+*.ap_
+
+# Signing key (rahasia, jangan push)
+*.jks
+*.keystore

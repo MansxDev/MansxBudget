@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light -->
+    <style name="Theme.Budgeting" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/pal_azure</item>
+        <item name="colorPrimaryVariant">@color/pal_azure_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/pal_lavender</item>
+        <item name="colorSecondaryVariant">@color/pal_lavender</item>
+        <item name="colorOnSecondary">@color/dark_bg</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/pal_wine</item>
+        <item name="colorError">@color/expense_red</item>
+        <item name="android:statusBarColor">@color/pal_azure_dark</item>
+        <item name="android:windowBackground">@color/bg_main</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Budgeting.BottomSheet</item>
+    </style>
+
+    <!-- Dark -->
+    <style name="Theme.Budgeting.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/pal_mint</item>
+        <item name="colorPrimaryVariant">@color/pal_mint_dark</item>
+        <item name="colorOnPrimary">@color/dark_on_primary</item>
+        <item name="colorSecondary">@color/pal_lavender</item>
+        <item name="colorSecondaryVariant">@color/pal_lavender</item>
+        <item name="colorOnSecondary">@color/dark_on_secondary</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorOnSurface">@color/dark_on_surface</item>
+        <item name="colorError">@color/dark_error</item>
+        <item name="android:statusBarColor">@color/dark_status</item>
+        <item name="android:windowBackground">@color/dark_bg</item>
+        <item name="android:textColorPrimary">@color/dark_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_text_secondary</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Budgeting.BottomSheet</item>
+    </style>
+
+    <!-- AMOLED true black -->
+    <style name="Theme.Budgeting.Amoled" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/pal_mint</item>
+        <item name="colorPrimaryVariant">@color/pal_mint_dark</item>
+        <item name="colorOnPrimary">@color/amoled_on_primary</item>
+        <item name="colorSecondary">@color/pal_lavender</item>
+        <item name="colorSecondaryVariant">@color/pal_lavender</item>
+        <item name="colorOnSecondary">@color/amoled_on_secondary</item>
+        <item name="colorSurface">@color/amoled_surface</item>
+        <item name="colorOnSurface">@color/amoled_on_surface</item>
+        <item name="colorError">@color/amoled_error</item>
+        <item name="android:statusBarColor">@color/amoled_status</item>
+        <item name="android:windowBackground">@color/amoled_bg</item>
+        <item name="android:textColorPrimary">@color/amoled_text_primary</item>
+        <item name="android:textColorSecondary">@color/amoled_text_secondary</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Budgeting.BottomSheet</item>
+    </style>
+
+    <style name="Theme.Budgeting.BottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Budgeting.BottomSheet</item>
+    </style>
+
+    <style name="Widget.Budgeting.BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">@drawable/sheet_bg</item>
+    </style>
+
+    <style name="Theme.Budgeting.Dialog.Floating" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:windowAnimationStyle">@style/Anim_Budgeting_Dialog</item>
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+    </style>
+
+    <style name="Anim_Budgeting_Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+</resources>

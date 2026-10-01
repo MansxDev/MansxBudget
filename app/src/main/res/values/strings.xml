@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MansxBudget</string>
+    <string name="header_title">MansxBudget</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_transactions">Transaksi</string>
+    <string name="nav_report">Laporan</string>
+    <string name="nav_budget">Anggaran</string>
+    <string name="nav_debts">Hutang</string>
+    <string name="nav_settings">Pengaturan</string>
+
+    <!-- Summary -->
+    <string name="total_balance">Total Saldo</string>
+    <string name="total_income">Pemasukan</string>
+    <string name="total_expense">Pengeluaran</string>
+    <string name="default_amount">Rp 0</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Halo, pejuang hemat!</string>
+    <string name="date_label">Tanggal aktif</string>
+    <string name="envelope_title">Batas Belanja Hari Ini</string>
+    <string name="envelope_empty">Atur anggaran kategori dulu untuk melihat batas harianmu.</string>
+    <string name="envelope_days_left">Sisa %1$d hari • Sisa budget %2$s</string>
+    <string name="insight_title">Insight Mingguan</string>
+    <string name="insight_empty">Catat transaksi rutin dan insight otomatis akan muncul di sini.</string>
+    <string name="projection_title">Proyeksi Akhir Bulan</string>
+    <string name="projection_empty">Belum ada pengeluaran bulan ini, proyeksi akan muncul setelah kamu mencatat belanja.</string>
+    <string name="projection_main">Rata-rata %1$s/hari • Proyeksi total %2$s</string>
+    <string name="projection_ok">Aman — saldo cukup sampai akhir bulan (sisa %1$s).</string>
+    <string name="projection_bad">Bahaya — proyeksi defisit %1$s, rem belanja mulai sekarang.</string>
+    <string name="recent_title">Transaksi Terakhir</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="alert_budget_over">Pengeluaran bulan ini (%1$s) melebihi total anggaran (%2$s)!</string>
+    <string name="alert_budget_near">Pengeluaran bulan ini sudah %1$d%% dari total anggaran.</string>
+
+    <!-- Menu Sidebar (legacy, kept) -->
+    <string name="menu_title">Menu Utama</string>
+    <string name="menu_dashboard">Ringkasan Utama</string>
+    <string name="menu_report">Tabel Laporan Kategori</string>
+    <string name="menu_category">Kelola Kategori</string>
+    <string name="menu_settings">Pengaturan Fitur &amp; Tema</string>
+    <string name="menu_calculator">Kalkulator Anggaran</string>
+    <string name="nav_calculator">Kalkulator</string>
+    <string name="menu_reminder">Pengingat Transaksi</string>
+
+    <!-- CRUD Form -->
+    <string name="form_title_add">Tambah Transaksi Baru</string>
+    <string name="form_title_edit">Edit Transaksi (ID: %1$d)</string>
+    <string name="hint_title">Judul / Catatan (e.g. Gaji, Makan Siang)</string>
+    <string name="hint_amount">Jumlah (Rp)</string>
+    <string name="label_type">Tipe Transaksi</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_frequency">Frekuensi</string>
+    <string name="freq_once">Sekali saja</string>
+    <string name="freq_daily">Harian</string>
+    <string name="freq_weekly">Mingguan</string>
+    <string name="freq_monthly">Bulanan</string>
+    <string name="type_income">Pemasukan</string>
+    <string name="type_expense">Pengeluaran</string>
+
+    <!-- Buttons -->
+    <string name="btn_save">Simpan / Tambah</string>
+    <string name="btn_update">Perbarui</string>
+    <string name="btn_delete">Hapus</string>
+    <string name="btn_clear">Batal / Clear</string>
+    <string name="btn_close">Tutup</string>
+    <string name="btn_use_result">Gunakan Hasil</string>
+    <string name="btn_export_csv">Export CSV</string>
+    <string name="btn_set_limit">Atur Limit</string>
+    <string name="btn_save_reminder">Simpan Pengingat</string>
+
+    <!-- List, filter & table -->
+    <string name="transaction_history">Riwayat Transaksi</string>
+    <string name="empty_transactions">Belum ada transaksi. Silakan tambah transaksi baru di atas.</string>
+    <string name="search_hint">Cari judul transaksi…</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_income">Masuk</string>
+    <string name="filter_expense">Keluar</string>
+    <string name="filter_category_all">Semua kategori</string>
+    <string name="filter_from">Dari tanggal</string>
+    <string name="filter_to">Sampai tanggal</string>
+    <string name="filter_min">Min Rp</string>
+    <string name="filter_max">Max Rp</string>
+    <string name="filter_reset">Reset</string>
+    <string name="table_report_title">Tabel Ringkasan per Kategori</string>
+    <string name="col_category">Kategori</string>
+    <string name="col_income">Pemasukan</string>
+    <string name="col_expense">Pengeluaran</string>
+    <string name="col_net">Sisa Net</string>
+    <string name="col_budget">Budget</string>
+    <string name="report_this_month">Bulan ini</string>
+    <string name="report_all_time">Semua waktu</string>
+    <string name="pie_title">Pengeluaran per Kategori</string>
+    <string name="pie_empty">Belum ada pengeluaran bulan ini.</string>
+    <string name="bar_title">Arus Kas 6 Bulan</string>
+
+    <!-- Budget -->
+    <string name="budget_title">Anggaran Bulanan</string>
+    <string name="budget_empty">Belum ada anggaran. Tambahkan limit per kategori.</string>
+    <string name="budget_add_hint">Nama kategori</string>
+    <string name="budget_add">Tambah</string>
+    <string name="budget_limit_title_dialog">Limit %1$s (Rp/bulan)</string>
+    <string name="budget_spent_of">%1$s dari %2$s</string>
+    <string name="budget_remaining">Sisa %1$s</string>
+    <string name="budget_over_by">Jebol %1$s!</string>
+
+    <!-- Recurring -->
+    <string name="recurring_title">Transaksi Berulang</string>
+    <string name="recurring_empty">Tidak ada template berulang. Tambahkan saat membuat transaksi via frekuensi.</string>
+    <string name="recurring_added_day">%1$d transaksi berulang ditambahkan otomatis.</string>
+
+    <!-- Theme & Settings -->
+    <string name="settings_title">Pengaturan Fitur &amp; Tema</string>
+    <string name="theme_select_title">Pilih Tema Tampilan</string>
+    <string name="theme_white">Terang (White)</string>
+    <string name="theme_dark">Gelap (Dark)</string>
+    <string name="theme_amoled">AMOLED (True Black)</string>
+    <string name="budget_limit_title">Batas Anggaran Pengeluaran (Rp)</string>
+    <string name="hint_budget_limit">Contoh: 5000000</string>
+    <string name="data_title">Data</string>
+    <string name="backup_title">Backup JSON</string>
+    <string name="restore_title">Restore JSON</string>
+    <string name="backup_success">Backup tersimpan: %1$s</string>
+    <string name="backup_failed">Backup gagal: %1$s</string>
+    <string name="restore_success">Restore berhasil, %1$d transaksi dimuat.</string>
+    <string name="restore_failed">Restore gagal: %1$s</string>
+    <string name="csv_success">CSV tersimpan: %1$s</string>
+    <string name="csv_failed">Export gagal: %1$s</string>
+    <string name="csv_empty">Tidak ada data untuk diexport.</string>
+    <string name="about_title">Tentang</string>
+    <string name="about_body">MansxBudget v2 — kelola pemasukan, pengeluaran, anggaran kategori, rencana dana, hutang &amp; piutang, dan transaksi berulang dalam satu genggaman.</string>
+    <string name="about_maker">Dibuat oleh MansxDev (rohimandev)</string>
+    <string name="howto_title">Cara Pakai</string>
+    <string name="howto_body">1. Tekan tombol + untuk tambah pemasukan/pengeluaran. Nominal otomatis format Rp.\n2. Tab Transaksi: cari, filter tanggal/kategori, geser kanan untuk hapus, geser kiri untuk edit, atau tahan untuk pilih banyak lalu hapus sekaligus.\n3. Tab Anggaran: atur limit tiap kategori agar envelope harian muncul di Beranda.\n4. Tab Rencana (di Anggaran): buat target dana (mis. Dana Darurat Rp 10.000.000), tambah/tarik progresnya.\n5. Tab Hutang: catat hutangmu ke orang dan piutang teman — pantau sisa, filter lunas/belum, dan geser untuk edit/hapus.\n6. Tab Laporan: pantau grafik, tabel kategori, dan export CSV.\n7. Pengaturan: ganti tema, aktifkan pengingat harian, backup/restore JSON agar data aman.</string>
+
+    <!-- Calculator -->
+    <string name="calculator_title">Kalkulator Anggaran</string>
+
+    <!-- Reminder & Notifications -->
+    <string name="reminder_title">Set Pengingat Catat Keuangan</string>
+    <string name="reminder_switch">Aktifkan Pengingat Harian</string>
+    <string name="reminder_notif_title">Waktunya Catat Keuangan!</string>
+    <string name="reminder_notif_body">Jangan lupa mencatat pemasukan dan pengeluaran Anda hari ini agar keuangan tetap teratur.</string>
+    <string name="reminder_saved">Pengingat harian berhasil diatur pada jam %1$02d:%2$02d</string>
+    <string name="reminder_disabled">Pengingat harian telah dinonaktifkan</string>
+
+    <!-- Floating Alert -->
+    <string name="alert_over_budget">PERINGATAN: Pengeluaran Anda (Rp %1$s) telah melebihi batas anggaran yang ditentukan!</string>
+    <string name="alert_warning_high_spending">PERHATIAN: Total pengeluaran mencapai %1$d%% dari total pemasukan!</string>
+
+    <!-- Insight sentences -->
+    <string name="insight_up">Pengeluaran minggu ini %1$s, naik %2$d%% dibanding minggu lalu.</string>
+    <string name="insight_down">Bagus! Pengeluaran minggu ini %1$s, turun %2$d%% dibanding minggu lalu.</string>
+    <string name="insight_flat">Pengeluaran minggu ini %1$s, relatif stabil dibanding minggu lalu.</string>
+    <string name="insight_top_cat">Kategori terbesar: %1$s (%2$s, %3$d%% dari total minggu ini).</string>
+    <!-- Select mode & swipe -->
+    <string name="sel_delete">Hapus (%1$d)</string>
+    <string name="sel_count">%1$d dipilih</string>
+    <string name="sel_all">Pilih semua</string>
+    <string name="sel_cancel">Batal</string>
+    <string name="sel_toggle">Pilih</string>
+    <string name="sel_confirm_title">Hapus transaksi?</string>
+    <string name="sel_confirm_msg">%1$d transaksi akan dihapus permanen. Lanjutkan?</string>
+    <string name="sel_deleted">%1$d transaksi dihapus.</string>
+    <string name="goal_sel_confirm_title">Hapus rencana?</string>
+    <string name="goal_sel_confirm_msg">%1$d rencana akan dihapus permanen. Lanjutkan?</string>
+    <string name="goal_sel_deleted">%1$d rencana dihapus.</string>
+    <string name="swipe_deleted">Transaksi dihapus.</string>
+    <string name="exit_title">Keluar dari MansxBudget?</string>
+    <string name="exit_msg">Yakin mau keluar dari aplikasi?</string>
+    <string name="exit_yes">Ya, keluar</string>
+    <string name="exit_no">Tetap di sini</string>
+
+    <!-- Goals / Rencana -->
+    <string name="goal_title">Rencana Dana</string>
+    <string name="goal_empty">Belum ada rencana. Buat target tabungan pertamamu.</string>
+    <string name="goal_name_hint">Nama rencana (mis. Dana Darurat)</string>
+    <string name="goal_target_hint">Target (Rp)</string>
+    <string name="goal_add">Buat</string>
+    <string name="goal_saved_of">%1$s dari %2$s</string>
+    <string name="goal_remaining">Kurang %1$s lagi</string>
+    <string name="goal_done">Target tercapai!</string>
+    <string name="goal_amount_hint">Jumlah (Rp)</string>
+    <string name="goal_add_funds">+ Tambah</string>
+    <string name="goal_withdraw">− Tarik</string>
+    <string name="goal_set_target">Ubah Target</string>
+
+    <!-- Calendar -->
+    <string name="calendar_today">Hari ini</string>
+    <string name="calendar_prev">Bulan sebelumnya</string>
+    <string name="calendar_next">Bulan berikutnya</string>
+    <string name="calendar_selected">Terpilih: %1$s</string>
+
+    <!-- Debts / Hutang -->
+    <string name="debt_title">Hutang &amp; Piutang</string>
+    <string name="debt_empty">Belum ada catatan hutang. Tambahkan hutang atau piutang baru.</string>
+    <string name="debt_add">Catat Hutang</string>
+    <string name="debt_form_title_add">Catat Hutang Baru</string>
+    <string name="debt_form_title_edit">Edit Hutang (ID: %1$d)</string>
+    <string name="debt_hint_name">Nama orang (mis. Budi, Andi)</string>
+    <string name="debt_hint_total">Jumlah hutang (Rp)</string>
+    <string name="debt_hint_paid">Sudah dibayar (Rp)</string>
+    <string name="debt_hint_purpose">Keperluan / dipakai untuk apa (mis. Modal usaha)</string>
+    <string name="debt_label_kind">Jenis catatan</string>
+    <string name="debt_kind_mine">Hutangku (aku berhutang)</string>
+    <string name="debt_kind_theirs">Piutang (teman berhutang)</string>
+    <string name="debt_label_date">Tanggal</string>
+    <string name="debt_filter_mine">Hutangku</string>
+    <string name="debt_filter_theirs">Piutang</string>
+    <string name="debt_filter_unpaid">Belum lunas</string>
+    <string name="debt_filter_paid">Lunas</string>
+    <string name="debt_paid_of">%1$s dari %2$s</string>
+    <string name="debt_remaining">Sisa %1$s</string>
+    <string name="debt_done">Lunas!</string>
+    <string name="debt_sum_mine">Total hutangku</string>
+    <string name="debt_sum_theirs">Total piutang</string>
+    <string name="debt_sum_active">Sisa aktif</string>
+    <string name="debt_sel_confirm_title">Hapus catatan hutang?</string>
+    <string name="debt_sel_confirm_msg">%1$d catatan akan dihapus permanen. Lanjutkan?</string>
+    <string name="debt_sel_deleted">%1$d catatan hutang dihapus.</string>
+    <string name="debt_saved">Catatan hutang tersimpan!</string>
+    <string name="debt_updated">Catatan hutang diperbarui!</string>
+    <string name="debt_deleted">Catatan hutang dihapus.</string>
+    <string name="debt_err_name">Nama tidak boleh kosong</string>
+    <string name="debt_err_amount">Jumlah hutang harus lebih besar dari 0</string>
+    <string name="debt_save_failed">Gagal menyimpan catatan hutang</string>
+
+    <!-- Transaksi header -->
+    <string name="trans_count">%1$d transaksi</string>
+    <!-- Laporan eyebrows -->
+    <string name="report_eyebrow_pie">Distribusi</string>
+    <string name="report_eyebrow_bar">Tren</string>
+    <string name="report_eyebrow_table">Rincian</string>
+    <string name="bar_empty">Belum ada data 6 bulan terakhir.</string>
+    <string name="pie_center">Pengeluaran\nBulan Ini</string>
+    <!-- Anggaran eyebrows -->
+    <string name="budget_eyebrow">Batas belanja</string>
+    <string name="goal_eyebrow">Tabungan berjangka</string>
+    <!-- Goal tanggal target & sync kalender -->
+    <string name="goal_date_pick">Pilih tanggal target</string>
+    <string name="goal_date_summary">Tanggal: %1$s</string>
+    <string name="goal_sync_cal">Sync ke Google Calendar</string>
+    <string name="goal_reminders">Pengingat (setelah aktif)</string>
+    <string name="goal_rem_h30">H-30</string>
+    <string name="goal_rem_h7">H-7</string>
+    <string name="goal_rem_h1">H-1</string>
+    <string name="goal_save_date">Simpan tanggal &amp; kalender</string>
+    <string name="goal_cal_perm_denied">Izin kalender ditolak, sync dimatikan</string>
+    <string name="goal_cal_date_required">Pilih tanggal dulu sebelum sync</string>
+    <string name="home_goal_next">Target terdekat</string>
+    <!-- Beranda customizable (v4.3) -->
+    <string name="home_customize">Atur Beranda</string>
+    <string name="prefs_eyebrow">Preferensi tampilan</string>
+    <string name="horizon_eyebrow">Horizon kalender</string>
+    <string name="horizon_label">Tampilkan %1$d hari ke depan</string>
+    <string name="home_save">Simpan</string>
+    <string name="home_reset">Reset ke Default</string>
+    <string name="widget_saldo">Saldo &amp; ringkasan</string>
+    <string name="widget_quick">Aksi Cepat</string>
+    <string name="widget_plan">Rencana Dana terdekat</string>
+    <string name="widget_calendar">Kalender Mini</string>
+    <string name="widget_chart">Grafik Cashflow</string>
+    <string name="widget_budget">Budget Tracker</string>
+    <string name="widget_last">Transaksi Terakhir</string>
+    <string name="quick_empty">Belum ada aksi cepat</string>
+    <string name="chart_empty">Belum ada grafik cashflow</string>
+    <!-- Auto-parse notifikasi bank (v4.4) -->
+    <string name="bank_notif_eyebrow">Notifikasi bank</string>
+    <string name="bank_confirm_title">Catat transaksi ini?</string>
+    <string name="bank_confirm_ok">Konfirmasi</string>
+    <string name="bank_confirm_ignore">Abaikan</string>
+    <string name="bank_badge_in">MASUK</string>
+    <string name="bank_badge_out">KELUAR</string>
+    <string name="bank_listener_label">MansxBudget - deteksi transaksi bank</string>
+    <string name="notif_access_title">Akses Notifikasi</string>
+    <string name="notif_access_on">Aktif - otomatis deteksi transaksi dari notifikasi bank</string>
+    <string name="notif_access_off">Nonaktif - tap untuk mengaktifkan</string>
+    <string name="notif_access_error">Tidak bisa membuka pengaturan akses notifikasi</string>
+    <string name="bank_sources_title">Sumber Bank Terdeteksi</string>
+    <string name="bank_sources_sub">%1$d sumber bawaan, %2$d kustom</string>
+    <string name="bank_sources_builtin">Bawaan: %1$s</string>
+    <string name="bank_sources_custom_head">Kustom (tap Hapus untuk buang):</string>
+    <string name="learn_eyebrow">Sumber baru terdeteksi</string>
+    <string name="learn_title">Daftarkan sumber ini?</string>
+    <string name="learn_desc">Notif dari app ini mirip pola transaksi bank. Daftarkan agar otomatis dikenali?</string>
+    <string name="learn_name_hint">Nama bank/app</string>
+    <string name="learn_name_empty">Isi nama bank/app dulu</string>
+    <string name="learn_ok">Daftarkan &amp; Catat</string>
+    <string name="learn_later">Nanti Saja</string>
+</resources>
