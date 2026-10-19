@@ -29,6 +29,7 @@ Terverifikasi on-device per rilis: install → launch → `logcat -b crash` koso
 | v4.3 | 19 | 2026-10-02 00:01 | 2,7 MB | **Beranda customizable**: sheet "Atur Beranda" (toggle 7 card + slider horizon kalender 7–90 hari), preferensi di SharedPreferences `home_prefs` |
 | v4.4 | 20 | 2026-10-02 00:17 | 2,6 MB | **Auto-parse notifikasi bank** via `NotificationListenerService` (tanpa READ_SMS): bottom sheet konfirmasi → form transaksi pre-filled; opt-in dari Pengaturan |
 | v4.5 | 21 | 2026-10-02 00:37 | 2,6 MB | **Perluasan bank + auto-learn**: whitelist 43 sumber (32 bank + 11 e-wallet), nominal terdekat keyword, sheet "Daftarkan sumber ini?" untuk package asing berpola bank, dialog daftar sumber + hapus custom |
+| v4.7 | 22 | 2026-10-02 16:14 | 2,7 MB | **Otak klasifikasi (Fase 1 tahap 1)**: `NotifScorer` (skor -5..+12) + 4 kelas (TRANSACTION / PROMO / OTP / INFO / AMBIGU), `CategoryMatcher` (81 merchant → 6 kategori existing, longest-match + word-boundary), ekstraksi merchant, fallback sumber asing, gate listener (PROMO/OTP/INFO skip total), badge "PERLU DICEK" untuk AMBIGU. DB tetap v5 |
 
 ## Catatan teknis lintas versi
 
@@ -37,6 +38,20 @@ Terverifikasi on-device per rilis: install → launch → `logcat -b crash` koso
 - DB v5 sejak v4.2, migrasi satu arah additive, backup/restore JSON ikut semua tabel.
 - Desugaring aktif (`java.time` aman di minSdk 21).
 - Release: `minifyEnabled` + `shrinkResources` true, signed `mansxbudget-release.jks`.
+- Notifikasi bank diproses on-device saja: `NotificationListenerService`, tanpa API cloud, tanpa READ_SMS/RECEIVE_SMS.
+- Auto-kategorisasi merchant hanya memakai kategori existing (`Makanan`, `Transportasi`, `Gaji`, `Belanja`, `Tagihan`, `Lainnya`) supaya tidak ada kategori liar dari notifikasi.
+
+## Catatan device Xiaomi/MIUI
+
+MIUI memblokir `NotificationListenerService` lewat AutoStart. Symptomsheet tidak muncul walau listener sudah "diizinkan":
+
+```
+AutoStartManagerService: MIUILOG- Reject service :Intent { act=android.service.notification.NotificationListenerService cmp=com.budgeting.me/.util.BankNotifListener }
+NotificationListeners: Autostart Unable to bind notification listener service
+```
+
+Solusi: MIUI > Security > Autostart > aktifkan **MansxBudget**, lalu toggle listener off/on supaya service di-bind ulang.
+Perintah untuk cek: `adb shell dumpsys activity services com.budgeting.me | grep BankNotifListener` (harus ada `isBindService:true`).
 
 ## Cara build
 

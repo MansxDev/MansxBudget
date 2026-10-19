@@ -120,6 +120,14 @@ class TransactionSheet : DialogFragment() {
                 val note = args.getString(ARG_TITLE).orEmpty()
                 if (note.isNotEmpty()) etTitle.setText(note)
             }
+            if (args != null && args.containsKey(ARG_CATEGORY)) {
+                // Kategori hasil auto-kategorisasi merchant. Hanya existing yang dipakai,
+                // supaya tidak ada kategori baru yang tersimpan dari notifikasi.
+                val presetCat = args.getString(ARG_CATEGORY).orEmpty()
+                if (presetCat.isNotBlank() && DEFAULT_CATEGORIES.contains(presetCat)) {
+                    checkChipByTag(chipCategory, presetCat)
+                }
+            }
         }
 
         btnCalc.setOnClickListener {
@@ -273,6 +281,7 @@ class TransactionSheet : DialogFragment() {
         private const val ARG_AMOUNT = "arg_amount"
         private const val ARG_TYPE = "arg_type"
         private const val ARG_TITLE = "arg_title"
+        private const val ARG_CATEGORY = "arg_category"
 
         fun forAdd(): TransactionSheet = TransactionSheet()
 
@@ -284,13 +293,19 @@ class TransactionSheet : DialogFragment() {
             return s
         }
 
-        /** Pre-fill dari notifikasi bank: nominal, jenis, dan catatan "{bank} - cuplikan". */
-        fun forBankNotif(amount: Long, type: String, note: String): TransactionSheet {
+        /**
+         * Pre-fill dari notifikasi bank: nominal, jenis, catatan "{bank} - cuplikan",
+         * dan kategori hasil auto-kategorisasi merchant (v4.7, hanya kategori existing).
+         */
+        fun forBankNotif(
+            amount: Long, type: String, note: String, category: String? = null
+        ): TransactionSheet {
             val s = TransactionSheet()
             val b = Bundle()
             b.putDouble(ARG_AMOUNT, amount.toDouble())
             b.putString(ARG_TYPE, type)
             b.putString(ARG_TITLE, note)
+            if (!category.isNullOrBlank()) b.putString(ARG_CATEGORY, category)
             s.arguments = b
             return s
         }

@@ -54,7 +54,14 @@ class MainActivity : AppCompatActivity() {
                         ?: BankNotifParser.KIND_OUT
                     val bank = intent.getStringExtra(BankNotifListener.EXTRA_BANK).orEmpty()
                     val raw = intent.getStringExtra(BankNotifListener.EXTRA_RAW).orEmpty()
-                    BankConfirmSheet.show(supportFragmentManager, amount, kind, bank, raw)
+                    val classification =
+                        intent.getStringExtra(BankNotifListener.EXTRA_CLASSIFICATION)
+                    val category = intent.getStringExtra(BankNotifListener.EXTRA_CATEGORY)
+                    val merchant = intent.getStringExtra(BankNotifListener.EXTRA_MERCHANT)
+                    BankConfirmSheet.show(
+                        supportFragmentManager, amount, kind, bank, raw,
+                        classification, category, merchant
+                    )
                 }
                 BankNotifListener.ACTION_BANK_UNKNOWN -> {
                     val pkg = intent.getStringExtra(BankNotifListener.EXTRA_PKG).orEmpty()
@@ -236,21 +243,42 @@ class MainActivity : AppCompatActivity() {
         s.show(supportFragmentManager, "sheet")
     }
 
-    /** Buka form transaksi pre-filled dari konfirmasi notifikasi bank. */
+    /**
+     * Buka form transaksi pre-filled dari konfirmasi notifikasi bank.
+     *
+     * [category] adalah hasil auto-kategorisasi merchant (v4.7) dan hanya
+     * dipakai kalau benar-benar salah satu kategori existing, supaya form
+     * tidak membuat chip kategori baru.
+     */
     fun openTransactionFromBankNotif(
-        amount: Long, kind: String, bank: String, raw: String
+        amount: Long, kind: String, bank: String, raw: String,
+        category: String? = null, merchant: String? = null
     ) {
         val type = if (kind == BankNotifParser.KIND_IN) {
             DatabaseHelper.TYPE_INCOME
         } else {
             DatabaseHelper.TYPE_EXPENSE
         }
-        val note = "$bank - ${raw.take(60)}".trim()
-        val s = TransactionSheet.forBankNotif(amount, type, note)
+        val note = buildBankNote(bank, raw, merchant)
+        val safeCategory = category?.takeIf { it in TransactionSheet.DEFAULT_CATEGORIES }
+        val s = TransactionSheet.forBankNotif(amount, type, note, safeCategory)
         s.setOnSaved(object : TransactionSheet.OnSaved {
             override fun onSaved() = refreshAllTabs()
         })
         s.show(supportFragmentManager, "sheet")
+    }
+
+    /**
+     * Catatan transaksi: "{bank} - {cuplikan notif}".
+     * Merchant tidak diulang kalau sudah muncul di cuplikan notif (v4.7).
+     */
+    private fun buildBankNote(bank: String, raw: String, merchant: String?): String {
+        val head = bank.trim()
+        val body = raw.trim().take(60)
+        val note = if (head.isEmpty()) body else "$head - $body"
+        val m = merchant?.trim().orEmpty()
+        if (m.isEmpty() || note.contains(m, ignoreCase = true)) return note
+        return "$note - $m"
     }
 
     fun refreshAllTabs() {

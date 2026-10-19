@@ -38,6 +38,10 @@
             android:exported="false" />
 
         <receiver
+            android:name=".util.CaptureUndoReceiver"
+            android:exported="false" />
+
+        <receiver
             android:name=".util.BootReceiver"
             android:exported="false">
             <intent-filter>

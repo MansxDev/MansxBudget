@@ -289,4 +289,28 @@
     <string name="learn_name_empty">Isi nama bank/app dulu</string>
     <string name="learn_ok">Daftarkan &amp; Catat</string>
     <string name="learn_later">Nanti Saja</string>
+    <!-- Otak klasifikasi notifikasi (v4.7) -->
+    <string name="bank_confirm_risk">PERLU DICEK</string>
+    <string name="bank_confirm_risk_hint">Sinyal notifikasi kurang jelas, cek nominal &amp; kategori.</string>
+    <string name="bank_confirm_merchant">Merchant: %1$s</string>
+    <string name="bank_confirm_auto_category">Otomatis: %1$s</string>
+    <!-- Auto-capture (v4.8) -->
+    <string name="capture_channel_label">Catat Otomatis</string>
+    <string name="capture_channel_desc">Konfirmasi singkat setiap transaksi yang dicatat otomatis dari notifikasi</string>
+    <string name="capture_notif_saved_title">Tercatat otomatis</string>
+    <string name="capture_notif_undo">Hapus</string>
+    <string name="capture_notif_review_title">%1$d perlu dicek</string>
+    <string name="capture_settings_title">Catat Otomatis</string>
+    <string name="capture_settings_sub">Tulis transaksi dari notifikasi tanpa perlu buka app</string>
+    <string name="capture_review_title">Perlu Dicek</string>
+    <string name="capture_review_empty">Tidak ada transaksi menunggu dicek.</string>
+    <string name="capture_review_sub">%1$d menunggu</string>
+    <string name="capture_review_reason">Alasan: %1$s</string>
+    <string name="capture_action_save">Catat</string>
+    <string name="capture_action_skip">Lewati</string>
+    <string name="capture_action_clear">Kosongkan</string>
+    <string name="capture_disabled_toast">Catat otomatis dimatikan</string>
+    <string name="capture_review_done">Tercatat</string>
+    <string name="capture_review_skipped">Dilewati</string>
+    <string name="capture_need_listener_first">Nyalakan akses notifikasi dulu</string>
 </resources>

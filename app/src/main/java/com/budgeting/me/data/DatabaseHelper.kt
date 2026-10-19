@@ -126,6 +126,43 @@ class DatabaseHelper(context: Context) :
         return rows
     }
 
+    /**
+     * Dedup lapis kedua untuk auto-capture: cari transaksi otomatis dengan
+     * nominal sama pada tanggal yang sama. Notifikasi kembar sering datang
+     * dari 2 aplikasi (mis. GoPay lalu BCA) sehingga fingerprint SharedPreferences
+     * saja tidak cukup.
+     */
+    fun findAutoByAmount(amount: Double, dateIso: String): Transaction? {
+        val db = readableDatabase
+        val c = db.query(
+            TABLE_TRANSACTIONS, null,
+            "$COLUMN_AMOUNT=? AND $COLUMN_DATE_ISO=? AND $COLUMN_AUTO=1",
+            arrayOf(amount.toString(), dateIso), null, null, "$COLUMN_ID DESC", "1"
+        )
+        var t: Transaction? = null
+        if (c != null) {
+            if (c.moveToFirst()) t = fromCursor(c)
+            c.close()
+        }
+        db.close()
+        return t
+    }
+
+    /** Jumlah transaksi otomatis (untuk baris ringkasan di Pengaturan). */
+    fun countAuto(): Long {
+        val db = readableDatabase
+        var n = 0L
+        val c = db.rawQuery(
+            "SELECT COUNT(*) FROM $TABLE_TRANSACTIONS WHERE $COLUMN_AUTO=1", null
+        )
+        if (c != null) {
+            if (c.moveToFirst()) n = c.getLong(0)
+            c.close()
+        }
+        db.close()
+        return n
+    }
+
     fun getTransaction(id: Long): Transaction? {
         val db = readableDatabase
         val c = db.query(TABLE_TRANSACTIONS, null, "$COLUMN_ID=?",

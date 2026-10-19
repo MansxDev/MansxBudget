@@ -26,8 +26,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.budgeting.me.MainActivity
 import com.budgeting.me.R
 import com.budgeting.me.data.DatabaseHelper
+import com.budgeting.me.model.Transaction
+import com.budgeting.me.util.AutoCapture
+import com.budgeting.me.util.BankNotifParser
 import com.budgeting.me.util.BankWhitelist
+import com.budgeting.me.util.CaptureStore
 import com.budgeting.me.util.ExportHelper
+import com.budgeting.me.util.FormatHelper
 import com.budgeting.me.util.ReminderReceiver
 import com.budgeting.me.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -39,6 +44,8 @@ class SettingsFragment : Fragment(), TabRefreshable {
     private var tvRecEmpty: TextView? = null
     private var tvNotifStatus: TextView? = null
     private var tvBankSources: TextView? = null
+    private var tvCaptureStatus: TextView? = null
+    private var tvCaptureReview: TextView? = null
     private var bankSourcesDialog: androidx.appcompat.app.AlertDialog? = null
     private lateinit var restoreLauncher: ActivityResultLauncher<Intent>
 
@@ -143,6 +150,9 @@ class SettingsFragment : Fragment(), TabRefreshable {
         rowSources.setOnClickListener { showBankSources() }
         refreshBankSources()
 
+        // Auto-capture (tulis transaksi sendiri dari notifikasi)
+        setupCaptureControls(v)
+
         // Recurring templates
         val rv: RecyclerView = v.findViewById(R.id.rv_recurring)
         rv.layoutManager = LinearLayoutManager(requireContext())
@@ -200,6 +210,193 @@ class SettingsFragment : Fragment(), TabRefreshable {
         // User mungkin baru balik dari Settings sistem.
         refreshNotifAccess()
         refreshBankSources()
+        refreshCaptureStatus()
+    }
+
+    /**
+     * Switch + antrean review untuk auto-capture.
+     * Switch hanyaartenaktif kalau akses notifikasi sudah menyala, karena
+     * tanpa listener tidak ada yang bisa ditangkap di latar belakang.
+     */
+    private fun setupCaptureControls(v: View) {
+        val ctx = requireContext()
+        val sw: CompoundButton = v.findViewById(R.id.sw_capture)
+        sw.isChecked = CaptureStore.isEnabled(ctx) && BankNotifParser.isListenerEnabled(ctx)
+
+        sw.setOnCheckedChangeListener { button, checked ->
+            if (!button.isPressed) return@setOnCheckedChangeListener
+            if (checked && !BankNotifParser.isListenerEnabled(ctx)) {
+                button.isChecked = false
+                try {
+                    startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+                } catch (e: Exception) {
+                    toast(getString(R.string.capture_need_listener_first))
+                }
+                return@setOnCheckedChangeListener
+            }
+            CaptureStore.setEnabled(ctx, checked)
+            if (!checked) CaptureStore.clearSeen(ctx)
+            refreshCaptureStatus()
+            toast(
+                if (checked) getString(R.string.capture_settings_sub)
+                else getString(R.string.capture_disabled_toast)
+            )
+        }
+
+        v.findViewById<View>(R.id.row_capture_review).setOnClickListener {
+            showReviewQueue()
+        }
+        tvCaptureReview = v.findViewById(R.id.tv_capture_review_count)
+        tvCaptureStatus = v.findViewById(R.id.tv_capture_status)
+        refreshCaptureStatus()
+    }
+
+    private fun refreshCaptureStatus() {
+        if (!isAdded) return
+        val ctx = context ?: return
+        val listening = BankNotifParser.isListenerEnabled(ctx)
+        val on = CaptureStore.isEnabled(ctx) && listening
+        tvCaptureStatus?.text = if (!listening) {
+            getString(R.string.notif_access_off)
+        } else if (on) {
+            getString(R.string.capture_settings_sub)
+        } else {
+            getString(R.string.capture_disabled_toast)
+        }
+        val pending = CaptureStore.pendingCount(ctx)
+        tvCaptureReview?.text = if (pending == 0) {
+            getString(R.string.capture_review_empty)
+        } else {
+            getString(R.string.capture_review_sub, pending)
+        }
+    }
+
+    /**
+     * Antrean review: hasil auto-capture yang skornya meragukan.
+     * Dua aksi per baris: Catat (tulis ke DB) atau Lewati (buang).
+     * Tidak ada transaksi yang hilang diam-diam.
+     */
+    private fun showReviewQueue() {
+        if (!isAdded) return
+        val ctx = requireContext()
+        val pending = CaptureStore.getPending(ctx)
+        if (pending.isEmpty()) {
+            toast(getString(R.string.capture_review_empty))
+            return
+        }
+
+        val root = LinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
+            val pad = (16 * resources.displayMetrics.density).toInt()
+            setPadding(pad, (8 * resources.displayMetrics.density).toInt(), pad, 0)
+        }
+        val scroll = ScrollView(ctx)
+        scroll.addView(root)
+
+        for (p in pending) {
+            root.addView(buildReviewRow(ctx, p))
+        }
+
+        val dialog = MaterialAlertDialogBuilder(ctx)
+            .setTitle(R.string.capture_review_title)
+            .setView(scroll)
+            .setPositiveButton(R.string.capture_action_clear, null)
+            .setNegativeButton(R.string.btn_close, null)
+            .create()
+        dialog.setOnDismissListener { refreshCaptureStatus() }
+        dialog.show()
+    }
+
+    private fun buildReviewRow(ctx: android.content.Context, p: CaptureStore.Pending): View {
+        val root = LinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
+            val pad = (12 * resources.displayMetrics.density).toInt()
+            setPadding(0, pad, 0, pad)
+        }
+        val amount = FormatHelper.formatRupiah(p.amount.toDouble())
+        // Judul disimpan sebagai "{sumber} - {merchant} - {cuplikan}".
+        val who = p.title.split(" - ").getOrNull(1)?.takeIf { it.isNotBlank() } ?: p.bank
+        val kind = if (p.kind == AutoCapture.KIND_IN) "+" else "-"
+
+        root.addView(TextView(ctx).apply {
+            text = "$kind$amount - $who\n${p.category} · skor ${p.score}"
+            textSize = 14f
+        })
+        root.addView(TextView(ctx).apply {
+            text = getString(R.string.capture_review_reason, p.reason)
+            textSize = 11f
+        })
+        root.addView(TextView(ctx).apply {
+            text = p.raw
+            textSize = 11f
+            maxLines = 3
+            alpha = 0.7f
+        })
+
+        val actions = LinearLayout(ctx).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = android.view.Gravity.END
+        }
+        actions.addView(TextView(ctx).apply {
+            text = getString(R.string.capture_action_skip)
+            textSize = 12f
+            val pad = (12 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, pad)
+            setOnClickListener {
+                CaptureStore.removePending(ctx, p.id)
+                refreshCaptureStatus()
+                toast(getString(R.string.capture_review_skipped))
+            }
+        })
+        actions.addView(TextView(ctx).apply {
+            text = getString(R.string.capture_action_save)
+            textSize = 12f
+            setTypeface(typeface, android.graphics.Typeface.BOLD)
+            val pad = (12 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, pad)
+            setTextColor(
+                try {
+                    val tv = android.util.TypedValue()
+                    ctx.theme.resolveAttribute(
+                        com.google.android.material.R.attr.colorPrimary, tv, true)
+                    tv.data
+                } catch (e: Exception) {
+                    0xFF6750A4.toInt()
+                }
+            )
+            setOnClickListener { savePending(ctx, p) }
+        })
+        root.addView(actions)
+        return root
+    }
+
+    /** Tulis satu antrean review ke DB sebagai transaksi manual-butuh-keputusan. */
+    private fun savePending(ctx: android.content.Context, p: CaptureStore.Pending) {
+        try {
+            val taken = CaptureStore.takePending(ctx, p.id)
+            if (taken == null) {
+                refreshCaptureStatus()
+                return
+            }
+            val database = db ?: DatabaseHelper(ctx)
+            val t = Transaction(
+                title = taken.title,
+                amount = taken.amount.toDouble(),
+                type = if (taken.kind == AutoCapture.KIND_IN)
+                    DatabaseHelper.TYPE_INCOME else DatabaseHelper.TYPE_EXPENSE,
+                category = taken.category,
+                date = null,
+                dateIso = FormatHelper.todayIso()
+            )
+            t.auto = 1
+            database.insertTransaction(t)
+            CaptureStore.markSeen(ctx, p.id)
+            refreshCaptureStatus()
+            toast(getString(R.string.capture_review_done))
+            (activity as? MainActivity)?.refreshAllTabs()
+        } catch (e: Exception) {
+            toast(getString(R.string.restore_failed, e.message))
+        }
     }
 
     private fun refreshBankSources() {
